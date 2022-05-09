@@ -66,10 +66,12 @@ namespace CarRepairApp.ViewModels
 
         private async void RegisterAsync()
         {
+            IsBusy = true;
             if (await RegistrationDataStore.AddItemAsync(User))
             {
                 NavigationService.NavigateToRoot();
             }
+            IsBusy = false;
         }
 
         public ObservableCollection<UserRole> UserRoles { get; set; }

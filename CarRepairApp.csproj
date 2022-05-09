@@ -99,12 +99,17 @@
     <Compile Include="Services\LoginUserDataStore.cs" />
     <Compile Include="Services\MessageService.cs" />
     <Compile Include="Services\RegistrationUserDataStore.cs" />
+    <Compile Include="Services\UserDataStore.cs" />
     <Compile Include="Services\UserIdentityService.cs" />
     <Compile Include="Services\UserRoleDataStore.cs" />
     <Compile Include="Services\ViewModelNavigationService.cs" />
     <Compile Include="Utils\NotifyableObject.cs" />
     <Compile Include="Utils\ObservableStack.cs" />
     <Page Include="Dictionaries\ViewTemplateDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Views\AccountView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -124,10 +129,14 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ViewModels\AccountViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\NavigationViewModel.cs" />
     <Compile Include="ViewModels\RegistrationViewModel.cs" />
+    <Compile Include="Views\Views\AccountView.xaml.cs">
+      <DependentUpon>AccountView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Views\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
     </Compile>

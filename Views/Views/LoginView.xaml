@@ -15,48 +15,53 @@
              TextOptions.TextRenderingMode="Auto"
              Background="{DynamicResource MaterialDesignPaper}"
              FontFamily="{DynamicResource MaterialDesignFont}">
-    <GroupBox Style="{StaticResource MaterialDesignCardGroupBox}"
-              Header="Форма входа"
-              VerticalAlignment="Center"
-              Margin="20">
-        <StackPanel FocusManager.FocusedElement="{Binding ElementName=TBoxLogin}">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto" />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <materialDesign:PackIcon Kind="Login" />
-                <TextBox Text="{Binding User.Login}"
-                         Name="TBoxLogin"
-                         materialDesign:HintAssist.Hint="Введите логин"
-                         MaxLength="100"
-                         Grid.Column="1"
-                         materialDesign:ValidationAssist.UsePopup="True" />
-            </Grid>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto" />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <materialDesign:PackIcon Kind="Key" />
-                <TextBox Text="{Binding User.Password}"
-                         Foreground="Transparent"
-                         Grid.Column="1"
-                         Focusable="False" />
-                <PasswordBox Background="Transparent"
-                             materialDesign:HintAssist.Hint="Введите пароль"
+    <Grid>
+        <ProgressBar IsIndeterminate="True"
+                     Opacity="{Binding IsBusy}"
+                     Panel.ZIndex="1"
+                     VerticalAlignment="Top"
+                     Width="30"
+                     Style="{StaticResource MaterialDesignCircularProgressBar}" />
+        <GroupBox Style="{StaticResource MaterialDesignCardGroupBox}"
+                  Header="Форма входа"
+                  VerticalAlignment="Center"
+                  Margin="20">
+            <StackPanel FocusManager.FocusedElement="{Binding ElementName=TBoxLogin}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <materialDesign:PackIcon Kind="Login" />
+                    <TextBox Text="{Binding User.Login}"
+                             Name="TBoxLogin"
+                             materialDesign:HintAssist.Hint="Введите логин"
+                             MaxLength="100"
                              Grid.Column="1"
-                             PasswordChanged="OnPasswordChanged" />
-            </Grid>
-            <Button Command="{Binding LoginCommand}"
-                    Content="Войти"
-                    IsDefault="True" />
-            <Button Command="{Binding GoToRegistrationViewModelCommand}"
-                    Content="Ещё нет аккаунта?"
-                    Style="{StaticResource  MaterialDesignFlatSecondaryLightButton}" />
-            <ProgressBar Opacity="{Binding IsBusy}"
-                         IsIndeterminate="True"
-                         Style="{StaticResource MaterialDesignCircularProgressBar}" />
-        </StackPanel>
-    </GroupBox>
+                             materialDesign:ValidationAssist.UsePopup="True" />
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <materialDesign:PackIcon Kind="Key" />
+                    <TextBox Text="{Binding User.Password}"
+                             Foreground="Transparent"
+                             Grid.Column="1"
+                             Focusable="False" />
+                    <PasswordBox Background="Transparent"
+                                 materialDesign:HintAssist.Hint="Введите пароль"
+                                 Grid.Column="1"
+                                 PasswordChanged="OnPasswordChanged" />
+                </Grid>
+                <Button Command="{Binding LoginCommand}"
+                        Content="Войти"
+                        IsDefault="True" />
+                <Button Command="{Binding GoToRegistrationViewModelCommand}"
+                        Content="Ещё нет аккаунта?"
+                        Style="{StaticResource  MaterialDesignFlatSecondaryLightButton}" />
+            </StackPanel>
+        </GroupBox>
+    </Grid>
 </UserControl>

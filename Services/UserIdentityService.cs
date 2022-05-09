@@ -6,7 +6,8 @@ using System.Text;
 
 namespace CarRepairApp.Services
 {
-    class UserIdentityService : IIdentityService<User>
+    [PropertyChanged.AddINotifyPropertyChangedInterface]
+    public class UserIdentityService : IIdentityService<User>
     {
         public User StrongIdentity
         {
@@ -36,6 +37,13 @@ namespace CarRepairApp.Services
         }
 
         public User WeakIdentity { get; set; }
+        public bool IsCanClearIdentity
+        {
+            get
+            {
+                return WeakIdentity != null || StrongIdentity != null;
+            }
+        }
 
         public void Logout()
         {

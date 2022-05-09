@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:CarRepairApp"
         mc:Ignorable="d"
         Title="{Binding NavigationService.CurrentTarget.Title}"
-        Height="450"
-        Width="800"
+        Height="850"
+        Width="1000"
         MinHeight="450"
         MinWidth="800"
         WindowStartupLocation="CenterScreen"
@@ -21,54 +21,61 @@
         TextOptions.TextFormattingMode="Ideal"
         TextOptions.TextRenderingMode="Auto"
         Background="{DynamicResource MaterialDesignPaper}"
-        FontFamily="{DynamicResource MaterialDesignFont}">
-    <GroupBox Header="{Binding NavigationService.CurrentTarget.Title}"
-              Style="{StaticResource MaterialDesignCardGroupBox}"
-              Margin="20"
-              FontSize="15">
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        Name="Reference">
+    <GroupBox Style="{StaticResource MaterialDesignCardGroupBox}"
+              Margin="20">
+        <GroupBox.HeaderTemplate>
+            <DataTemplate>
+                <Grid Height="35">
+                    <TextBlock Text="{Binding ElementName=Reference, Path=DataContext.NavigationService.CurrentTarget.Title}"
+                               VerticalAlignment="Center"
+                               FontSize="20" />
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Right">
+                        <Button Command="{Binding DataContext.GoBackCommand, ElementName=Reference}"
+                                Content="Назад"
+                                ToolTip="Вернуться на предыдущую страницу">
+                            <Button.Style>
+                                <Style TargetType="Button"
+                                       BasedOn="{StaticResource MaterialDesignPaperButton}">
+                                    <Setter Property="Visibility"
+                                            Value="Collapsed" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding DataContext.NavigationService.IsCanGoBack, ElementName=Reference}"
+                                                     Value="True">
+                                            <Setter Property="Visibility"
+                                                    Value="Visible" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                        <Button Command="{Binding DataContext.ClearSessionCommand, ElementName=Reference}"
+                                Content="Завершить сессию"
+                                ToolTip="Завершить сессию и вернуться на страницу авторизации">
+                            <Button.Style>
+                                <Style TargetType="Button"
+                                       BasedOn="{StaticResource MaterialDesignPaperButton}">
+                                    <Setter Property="Visibility"
+                                            Value="Collapsed" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding DataContext.Identity.IsCanClearIdentity, ElementName=Reference}"
+                                                     Value="True">
+                                            <Setter Property="Visibility"
+                                                    Value="Visible" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </DataTemplate>
+        </GroupBox.HeaderTemplate>
         <Grid>
-            <StackPanel Orientation="Horizontal"
-                        HorizontalAlignment="Right">
-                <Button Command="{Binding GoBackCommand}"
-                        Content="Назад"
-                        Margin="5"
-                        ToolTip="Вернуться на предыдущую страницу">
-                    <Button.Style>
-                        <Style TargetType="Button"
-                               BasedOn="{StaticResource MaterialDesignPaperButton}">
-                            <Setter Property="Visibility"
-                                    Value="Collapsed" />
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding NavigationService.IsCanGoBack}"
-                                             Value="True">
-                                    <Setter Property="Visibility"
-                                            Value="Visible" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Button.Style>
-                </Button>
-                <Button Command="{Binding ClearSessionCommand}"
-                        Content="Завершить сессию"
-                        Margin="5"
-                        ToolTip="Завершить сессию и вернуться на страницу авторизации">
-                    <Button.Style>
-                        <Style TargetType="Button"
-                               BasedOn="{StaticResource MaterialDesignPaperButton}">
-                            <Setter Property="Visibility"
-                                    Value="Collapsed" />
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding IsCanClearIdentity}"
-                                             Value="True">
-                                    <Setter Property="Visibility"
-                                            Value="Visible" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Button.Style>
-                </Button>
-            </StackPanel>
             <Frame Content="{Binding NavigationService.CurrentTarget}"
+                   Name="MainFrame"
                    Grid.Row="1"
                    NavigationUIVisibility="Hidden" />
         </Grid>

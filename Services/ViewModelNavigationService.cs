@@ -13,6 +13,16 @@ namespace CarRepairApp.Services
             Journal.CollectionChanged += (_, __) =>
             {
                 CurrentTarget = Journal.Peek();
+                if (Journal.Count < 2)
+                {
+                    IsCanGoBack = false;
+                }
+                else
+                {
+                    BaseViewModel viewModel = Journal
+                        .ElementAt(1);
+                    IsCanGoBack = !(viewModel is LoginViewModel) || Journal.Peek() is RegistrationViewModel;
+                }
             };
         }
 
@@ -48,19 +58,6 @@ namespace CarRepairApp.Services
                                          new object[] { param }));
         }
 
-        public bool IsCanGoBack
-        {
-            get
-            {
-                if (Journal.Count < 2)
-                {
-                    return false;
-                }
-                BaseViewModel viewModel = Journal
-                    .ElementAt(1);
-                return !(viewModel is LoginViewModel)
-                       || Journal.Peek() is RegistrationViewModel;
-            }
-        }
+        public bool IsCanGoBack { get; set; }
     }
 }

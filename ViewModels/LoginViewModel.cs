@@ -31,10 +31,12 @@ namespace CarRepairApp.ViewModels
 
         private async void LoginAsync()
         {
+            IsBusy = true;
             if (await LoginDataStore.AddItemAsync(User))
             {
-
+                NavigationService.Navigate<AccountViewModel>();
             }
+            IsBusy = false;
         }
 
         private Command goToRegistrationViewModelCommand;

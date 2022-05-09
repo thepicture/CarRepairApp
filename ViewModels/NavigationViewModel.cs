@@ -6,9 +6,6 @@ namespace CarRepairApp.ViewModels
     [PropertyChanged.AddINotifyPropertyChangedInterface]
     public class NavigationViewModel : BaseViewModel
     {
-        public bool IsCanClearIdentity =>
-            Identity.WeakIdentity != null || Identity.StrongIdentity != null;
-
         private Command goBackCommand;
 
         public ICommand GoBackCommand

@@ -34,20 +34,27 @@ namespace CarRepairApp
                 return;
             }
 
+            DependencyService.Register<ViewModelNavigationService>();
             DependencyService.Register<HashGenerator>();
             DependencyService.Register<UserRoleDataStore>();
             DependencyService.Register<LoginUserDataStore>();
             DependencyService.Register<RegistrationUserDataStore>();
             DependencyService.Register<RegistrationViewModel>();
             DependencyService.Register<UserIdentityService>();
-            DependencyService.Register<ViewModelNavigationService>();
+            DependencyService.Register<UserDataStore>();
 
-            DependencyService.Get<INavigationService<BaseViewModel>>()
-                   .Navigate<LoginViewModel>();
             if (!string.IsNullOrWhiteSpace(
                 Settings.Default.SerializedIdentity))
             {
-                // TODO: Navigate to AccountViewModel
+                DependencyService
+                .Get<INavigationService<BaseViewModel>>()
+                .Navigate<AccountViewModel>();
+            }
+            else
+            {
+                DependencyService
+               .Get<INavigationService<BaseViewModel>>()
+               .Navigate<LoginViewModel>();
             }
         }
     }

@@ -1,0 +1,142 @@
+﻿<UserControl x:Class="CarRepairApp.Views.Views.AccountView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:CarRepairApp.Views.Views"
+             xmlns:viewmodels="clr-namespace:CarRepairApp.ViewModels"
+             d:DataContext="{d:DesignInstance Type=viewmodels:AccountViewModel}"
+             mc:Ignorable="d"
+             d:DesignHeight="450"
+             d:DesignWidth="800"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             TextElement.FontWeight="Regular"
+             TextElement.FontSize="13"
+             TextOptions.TextFormattingMode="Ideal"
+             TextOptions.TextRenderingMode="Auto"
+             Background="{DynamicResource MaterialDesignPaper}"
+             FontFamily="{DynamicResource MaterialDesignFont}"
+             IsVisibleChanged="OnIsVisibleChanged">
+    <UniformGrid Columns="2"
+                 VerticalAlignment="Center"
+                 Margin="20">
+        <GroupBox Header="Действия"
+                  Style="{StaticResource MaterialDesignCardGroupBox}"
+                  Margin="0 0 50 0">
+            <StackPanel>
+                <Button Command="{Binding GoToCatalogViewModel}"
+                        Content="Выполнение работ и оплаты"
+                        Margin="5" />
+                <Button Command="{Binding GoToContactsViewModel}"
+                        Content="Запчасти"
+                        Margin="5" />
+                <Button Command="{Binding GoToContactsViewModel}"
+                        Content="Контакты"
+                        Margin="5" />
+                <Button Command="{Binding GoToFeedbackViewModel}"
+                        Content="Обратная связь"
+                        Margin="5" />
+            </StackPanel>
+        </GroupBox>
+        <GroupBox Header="Форма профиля"
+                  Style="{StaticResource MaterialDesignCardGroupBox}">
+            <StackPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <materialDesign:PackIcon Kind="Email" />
+                    <TextBox Text="{Binding User.Login, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                             materialDesign:HintAssist.Hint="Введите логин"
+                             MaxLength="100"
+                             Grid.Column="1"
+                             materialDesign:ValidationAssist.UsePopup="True" />
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <materialDesign:PackIcon Kind="TextUser" />
+                    <TextBox Text="{Binding User.LastName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                             materialDesign:HintAssist.Hint="Введите фамилию"
+                             MaxLength="100"
+                             Grid.Column="1" />
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <materialDesign:PackIcon Kind="TicketUser" />
+                    <TextBox Text="{Binding User.FirstName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                             materialDesign:HintAssist.Hint="Введите имя"
+                             MaxLength="100"
+                             Grid.Column="1" />
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <materialDesign:PackIcon Kind="User" />
+                    <TextBox Text="{Binding User.Patronymic, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                             materialDesign:HintAssist.Hint="Введите отчество"
+                             materialDesign:HintAssist.HelperText="*не обязательно"
+                             MaxLength="100"
+                             Grid.Column="1" />
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <materialDesign:PackIcon Kind="IdentificationCard" />
+                    <TextBox  Text="{Binding User.Role.Title}"
+                              IsReadOnly="True"
+                              Grid.Column="1">
+                    </TextBox>
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <materialDesign:PackIcon Kind="Password" />
+                    <TextBox Text="{Binding User.Password, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                             Foreground="Transparent"
+                             Grid.Column="1"
+                             Focusable="False" />
+                    <PasswordBox Name="PBoxPassword"
+                                 Background="Transparent"
+                                 materialDesign:HintAssist.Hint="Введите пароль"
+                                 Grid.Column="1"
+                                 PasswordChanged="OnPasswordChanged" />
+                </Grid>
+                <Ellipse Height="200"
+                         Width="200">
+                    <Ellipse.Fill>
+                        <ImageBrush Stretch="UniformToFill">
+                            <ImageBrush.ImageSource>
+                                <Binding Path="User.Photo">
+                                    <Binding.TargetNullValue>
+                                        <ImageSource>
+                                            /Resources/car-wrench-black.png
+                                        </ImageSource>
+                                    </Binding.TargetNullValue>
+                                </Binding>
+                            </ImageBrush.ImageSource>
+                        </ImageBrush>
+                    </Ellipse.Fill>
+                </Ellipse>
+                <Button Command="{Binding SelectImageCommand}"
+                        Content="Изменить фото"
+                        Style="{StaticResource  MaterialDesignFlatSecondaryLightButton}" />
+                <Button Command="{Binding SaveChangesCommand}"
+                        Content="Сохранить изменения" />
+            </StackPanel>
+        </GroupBox>
+    </UniformGrid>
+</UserControl>

@@ -1,5 +1,6 @@
 ﻿using CarRepairApp.Models.Entities;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -16,6 +17,7 @@ namespace CarRepairApp.Services
                     if (!string.IsNullOrWhiteSpace(item.Login)
                         && !string.IsNullOrWhiteSpace(item.Password)
                         && model.Users
+                            .Include(u => u.Role)
                             .AsNoTracking()
                             .FirstOrDefault(u => u.Login == item.Login)
                                 is User currentUser)
