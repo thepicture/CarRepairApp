@@ -1,4 +1,5 @@
-﻿using CarRepairApp.ViewModels;
+﻿using CarRepairApp.Utils;
+using CarRepairApp.ViewModels;
 using System;
 using System.Linq;
 
@@ -7,10 +8,17 @@ namespace CarRepairApp.Services
     [PropertyChanged.AddINotifyPropertyChangedInterface]
     public class ViewModelNavigationService : INavigationService<BaseViewModel>
     {
-        public ObservableStack<BaseViewModel> Journal { get; set; } =
-            new ObservableStack<BaseViewModel>();
+        public ViewModelNavigationService()
+        {
+            Journal.CollectionChanged += (_, __) =>
+            {
+                CurrentTarget = Journal.Peek();
+            };
+        }
 
-        public BaseViewModel CurrentTarget => Journal.Peek();
+        public ObservableStack<BaseViewModel> Journal { get; set; }
+            = new ObservableStack<BaseViewModel>();
+        public BaseViewModel CurrentTarget { get; set; }
 
         public void Navigate<TWhere>() where TWhere : BaseViewModel
         {

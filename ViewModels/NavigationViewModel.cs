@@ -6,8 +6,6 @@ namespace CarRepairApp.ViewModels
     [PropertyChanged.AddINotifyPropertyChangedInterface]
     public class NavigationViewModel : BaseViewModel
     {
-        public BaseViewModel CurrentViewModel =>
-            NavigationService.CurrentTarget;
         public bool IsCanClearIdentity =>
             Identity.WeakIdentity != null || Identity.StrongIdentity != null;
 

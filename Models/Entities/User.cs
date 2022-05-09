@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using CarRepairApp.Services;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -68,7 +69,22 @@ namespace CarRepairApp.Models.Entities
 
         public string Error => throw new System.NotImplementedException();
 
+        private string password;
         [NotMapped]
-        public string Password { get; set; }
+        public string Password
+        {
+            get => password;
+            set
+            {
+                password = value;
+                DependencyService
+                    .Get<IHashGenerator>()
+                    .GenerateHash(value,
+                                  out byte[] passwordHash,
+                                  out byte[] passwordSalt);
+                PasswordHash = passwordHash;
+                Salt = passwordSalt;
+            }
+        }
     }
 }

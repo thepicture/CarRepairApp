@@ -22,7 +22,8 @@ namespace CarRepairApp
             Database.SetInitializer(new DatabaseInitializer());
             try
             {
-                new BaseModel().Database.Connection.Open();
+                new BaseModel().Database.Connection
+                    .Open();
             }
             catch (Exception)
             {
@@ -33,11 +34,13 @@ namespace CarRepairApp
                 return;
             }
 
-            DependencyService.Register<ViewModelNavigationService>();
+            DependencyService.Register<HashGenerator>();
+            DependencyService.Register<UserRoleDataStore>();
             DependencyService.Register<LoginUserDataStore>();
             DependencyService.Register<RegistrationUserDataStore>();
+            DependencyService.Register<RegistrationViewModel>();
             DependencyService.Register<UserIdentityService>();
-            DependencyService.Register<HashGenerator>();
+            DependencyService.Register<ViewModelNavigationService>();
 
             DependencyService.Get<INavigationService<BaseViewModel>>()
                    .Navigate<LoginViewModel>();

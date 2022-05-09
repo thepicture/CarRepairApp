@@ -100,7 +100,9 @@
     <Compile Include="Services\MessageService.cs" />
     <Compile Include="Services\RegistrationUserDataStore.cs" />
     <Compile Include="Services\UserIdentityService.cs" />
+    <Compile Include="Services\UserRoleDataStore.cs" />
     <Compile Include="Services\ViewModelNavigationService.cs" />
+    <Compile Include="Utils\NotifyableObject.cs" />
     <Compile Include="Utils\ObservableStack.cs" />
     <Page Include="Dictionaries\ViewTemplateDictionary.xaml">
       <SubType>Designer</SubType>
@@ -173,6 +175,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\car-wrench.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\user.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Sources.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

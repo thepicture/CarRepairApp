@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CarRepairApp"
         mc:Ignorable="d"
-        Title="{Binding CurrentViewModel.Title}"
+        Title="{Binding NavigationService.CurrentTarget.Title}"
         Height="450"
         Width="800"
         MinHeight="450"
@@ -22,7 +22,7 @@
         TextOptions.TextRenderingMode="Auto"
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}">
-    <GroupBox Header="{Binding CurrentViewModel.Title}"
+    <GroupBox Header="{Binding NavigationService.CurrentTarget.Title}"
               Style="{StaticResource MaterialDesignCardGroupBox}"
               Margin="20"
               FontSize="15">
@@ -68,7 +68,7 @@
                     </Button.Style>
                 </Button>
             </StackPanel>
-            <Frame Content="{Binding CurrentViewModel}"
+            <Frame Content="{Binding NavigationService.CurrentTarget}"
                    Grid.Row="1"
                    NavigationUIVisibility="Hidden" />
         </Grid>

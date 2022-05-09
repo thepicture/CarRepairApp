@@ -7,9 +7,39 @@ namespace CarRepairApp.Services
 {
     public class RegistrationUserDataStore : IDataStore<RegistrationUser>
     {
-        public Task<bool> AddItemAsync(RegistrationUser item)
+        public async Task<bool> AddItemAsync(RegistrationUser item)
         {
-            throw new NotImplementedException();
+            if (!item.IsValid)
+            {
+                await DependencyService
+                    .Get<IMessageService>()
+                    .InformErrorAsync("Исправьте ошибки полей " +
+                    "перед сохранением пользователя");
+                return false;
+            }
+            return await Task.Run(() =>
+            {
+                using (BaseModel model = new BaseModel())
+                {
+                    model.Entry(item.Role).State = System.Data.Entity.EntityState.Unchanged;
+                    model.Users.Add(item);
+                    try
+                    {
+                        model.SaveChanges();
+                        DependencyService
+                            .Get<IMessageService>()
+                            .InformAsync("Вы зарегистрированы");
+                        return true;
+                    }
+                    catch (Exception ex)
+                    {
+                        DependencyService
+                            .Get<IMessageService>()
+                            .InformErrorAsync(ex);
+                        return false;
+                    }
+                }
+            });
         }
 
         public Task<bool> DeleteItemAsync(object id)

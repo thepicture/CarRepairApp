@@ -37,20 +37,21 @@ namespace CarRepairApp.ViewModels
             }
         }
 
-        private Command goToRegisterViewModelCommand;
+        private Command goToRegistrationViewModelCommand;
 
-        public ICommand GoToRegisterViewModelCommand
+        public ICommand GoToRegistrationViewModelCommand
         {
             get
             {
-                if (goToRegisterViewModelCommand == null)
-                    goToRegisterViewModelCommand = new Command(GoToRegisterViewModel);
-                return goToRegisterViewModelCommand;
+                if (goToRegistrationViewModelCommand == null)
+                    goToRegistrationViewModelCommand = new Command(GoToRegistrationViewModel);
+                return goToRegistrationViewModelCommand;
             }
         }
 
-        private void GoToRegisterViewModel()
+        private void GoToRegistrationViewModel()
         {
+            NavigationService.Navigate<RegistrationViewModel>();
         }
     }
 }

@@ -9,6 +9,7 @@ namespace CarRepairApp.Models.Entities
     {
         public override void InitializeDatabase(BaseModel context)
         {
+            context.Database.CreateIfNotExists();
             context.Database.ExecuteSqlCommand(
                 TransactionalBehavior.DoNotEnsureTransaction,
                 string.Format(

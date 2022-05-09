@@ -51,7 +51,7 @@
             <Button Command="{Binding LoginCommand}"
                     Content="Войти"
                     IsDefault="True" />
-            <Button Command="{Binding GoToRegisterViewModelCommand}"
+            <Button Command="{Binding GoToRegistrationViewModelCommand}"
                     Content="Ещё нет аккаунта?"
                     Style="{StaticResource  MaterialDesignFlatSecondaryLightButton}" />
             <ProgressBar Opacity="{Binding IsBusy}"

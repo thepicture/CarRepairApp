@@ -1,21 +1,26 @@
 ﻿using CarRepairApp.Models.Entities;
 using CarRepairApp.Services;
+using CarRepairApp.Utils;
 
 namespace CarRepairApp.ViewModels
 {
     [PropertyChanged.AddINotifyPropertyChangedInterface]
-    public abstract class BaseViewModel
+    public abstract class BaseViewModel : NotifyableObject
     {
         public INavigationService<BaseViewModel> NavigationService =>
             DependencyService.Get<INavigationService<BaseViewModel>>();
         public IIdentityService<User> Identity =>
-           DependencyService.Get<IIdentityService<User>>();
+            DependencyService.Get<IIdentityService<User>>();
         public IMessageService MessageService =>
-           DependencyService.Get<IMessageService>();
+            DependencyService.Get<IMessageService>();
         public IHashGenerator HashGenerator =>
-           DependencyService.Get<IHashGenerator>();
+            DependencyService.Get<IHashGenerator>();
+        public IDataStore<UserRole> UserRoleDataStore =>
+            DependencyService.Get<IDataStore<UserRole>>();
         public IDataStore<LoginUser> LoginDataStore =>
-           DependencyService.Get<IDataStore<LoginUser>>();
+            DependencyService.Get<IDataStore<LoginUser>>();
+        public IDataStore<RegistrationUser> RegistrationDataStore =>
+            DependencyService.Get<IDataStore<RegistrationUser>>();
 
         public bool IsBusy { get; set; }
         public bool IsNotBusy => !IsBusy;
