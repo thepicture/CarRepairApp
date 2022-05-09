@@ -1,12 +1,62 @@
 ﻿<UserControl x:Class="CarRepairApp.Views.Views.LoginView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:CarRepairApp.Views.Views"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <TextBlock Text="Login"/>
-    </Grid>
+             xmlns:viewmodels="clr-namespace:CarRepairApp.ViewModels"
+             d:DataContext="{d:DesignInstance Type=viewmodels:LoginViewModel}"
+             mc:Ignorable="d"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             TextElement.FontWeight="Regular"
+             TextElement.FontSize="13"
+             TextOptions.TextFormattingMode="Ideal"
+             TextOptions.TextRenderingMode="Auto"
+             Background="{DynamicResource MaterialDesignPaper}"
+             FontFamily="{DynamicResource MaterialDesignFont}">
+    <GroupBox Style="{StaticResource MaterialDesignCardGroupBox}"
+              Header="Форма входа"
+              VerticalAlignment="Center"
+              Margin="20">
+        <StackPanel FocusManager.FocusedElement="{Binding ElementName=TBoxLogin}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <materialDesign:PackIcon Kind="Login" />
+                <TextBox Text="{Binding User.Login}"
+                         Name="TBoxLogin"
+                         materialDesign:HintAssist.Hint="Введите логин"
+                         MaxLength="100"
+                         Grid.Column="1"
+                         materialDesign:ValidationAssist.UsePopup="True" />
+            </Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <materialDesign:PackIcon Kind="Key" />
+                <TextBox Text="{Binding User.Password}"
+                         Foreground="Transparent"
+                         Grid.Column="1"
+                         Focusable="False" />
+                <PasswordBox Background="Transparent"
+                             materialDesign:HintAssist.Hint="Введите пароль"
+                             Grid.Column="1"
+                             PasswordChanged="OnPasswordChanged" />
+            </Grid>
+            <Button Command="{Binding LoginCommand}"
+                    Content="Войти"
+                    IsDefault="True" />
+            <Button Command="{Binding GoToRegisterViewModelCommand}"
+                    Content="Ещё нет аккаунта?"
+                    Style="{StaticResource  MaterialDesignFlatSecondaryLightButton}" />
+            <ProgressBar Opacity="{Binding IsBusy}"
+                         IsIndeterminate="True"
+                         Style="{StaticResource MaterialDesignCircularProgressBar}" />
+        </StackPanel>
+    </GroupBox>
 </UserControl>

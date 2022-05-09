@@ -1,9 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CarRepairApp.Models.Entities
 {
     [PropertyChanged.AddINotifyPropertyChangedInterface]
-    public class User : BaseEntity
+    public class User : BaseEntity, IDataErrorInfo
     {
         [MaxLength(100)]
         [Required]
@@ -27,5 +29,46 @@ namespace CarRepairApp.Models.Entities
         public int RoleId { get; set; }
 
         public virtual UserRole Role { get; set; }
+
+        public string this[string columnName]
+        {
+            get
+            {
+                if (columnName == nameof(Login))
+                    if (string.IsNullOrWhiteSpace(Login))
+                        return "Логин обязателен";
+                if (columnName == nameof(LastName))
+                    if (string.IsNullOrWhiteSpace(LastName))
+                        return "Фамилия обязательна";
+                if (columnName == nameof(FirstName))
+                    if (string.IsNullOrWhiteSpace(FirstName))
+                        return "Имя обязательно";
+                if (columnName == nameof(UserRole))
+                    if (Role == null)
+                        return "Укажите роль";
+                if (columnName == nameof(Password))
+                    if (string.IsNullOrWhiteSpace(Password) || Password.Length < 6)
+                        return "Введите пароль длиной от 6 символов";
+                return null;
+            }
+        }
+
+        public bool IsValid
+        {
+            get
+            {
+                if (this[nameof(Login)] != null) return false;
+                if (this[nameof(LastName)] != null) return false;
+                if (this[nameof(FirstName)] != null) return false;
+                if (this[nameof(Role)] != null) return false;
+                if (this[nameof(Password)] != null) return false;
+                return true;
+            }
+        }
+
+        public string Error => throw new System.NotImplementedException();
+
+        [NotMapped]
+        public string Password { get; set; }
     }
 }

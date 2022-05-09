@@ -24,5 +24,10 @@ namespace CarRepairApp.Views.Views
         {
             InitializeComponent();
         }
+
+        private void OnPasswordChanged(object sender, RoutedEventArgs e)
+        {
+            ((dynamic)DataContext).User.Password = (sender as PasswordBox).Password;
+        }
     }
 }

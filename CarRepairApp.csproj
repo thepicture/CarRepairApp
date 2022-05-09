@@ -86,7 +86,6 @@
     <Compile Include="Models\Entities\BaseModel.cs" />
     <Compile Include="Models\Entities\DatabaseInitializer.cs" />
     <Compile Include="Models\Entities\LoginUser.cs" />
-    <Compile Include="Models\Entities\PasswordedUser.cs" />
     <Compile Include="Models\Entities\RegistrationUser.cs" />
     <Compile Include="Models\Entities\User.cs" />
     <Compile Include="Models\Entities\UserRole.cs" />

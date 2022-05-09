@@ -14,6 +14,8 @@ namespace CarRepairApp.ViewModels
            DependencyService.Get<IMessageService>();
         public IHashGenerator HashGenerator =>
            DependencyService.Get<IHashGenerator>();
+        public IDataStore<LoginUser> LoginDataStore =>
+           DependencyService.Get<IDataStore<LoginUser>>();
 
         public bool IsBusy { get; set; }
         public bool IsNotBusy => !IsBusy;

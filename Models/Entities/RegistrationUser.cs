@@ -1,7 +1,7 @@
 ﻿namespace CarRepairApp.Models.Entities
 {
     [PropertyChanged.AddINotifyPropertyChangedInterface]
-    public class RegistrationUser
+    public class RegistrationUser : User
     {
     }
 }
