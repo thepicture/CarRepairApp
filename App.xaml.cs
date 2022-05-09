@@ -39,6 +39,7 @@ namespace CarRepairApp
             DependencyService.Register<UserRoleDataStore>();
             DependencyService.Register<LoginUserDataStore>();
             DependencyService.Register<RegistrationUserDataStore>();
+            DependencyService.Register<FeedbackDataStore>();
             DependencyService.Register<RegistrationViewModel>();
             DependencyService.Register<UserIdentityService>();
             DependencyService.Register<UserDataStore>();

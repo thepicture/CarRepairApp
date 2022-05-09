@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using CarRepairApp.ViewModels;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace CarRepairApp.Views.Views
@@ -20,9 +21,9 @@ namespace CarRepairApp.Views.Views
 
         private void OnIsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            if (Visibility == Visibility.Visible && DataContext != null)
+            if (Visibility == Visibility.Visible && DataContext is AccountViewModel viewModel)
             {
-                PBoxPassword.Password = ((dynamic)DataContext).User.Password;
+                PBoxPassword.Password = viewModel.User.Password;
             }
         }
     }

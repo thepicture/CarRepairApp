@@ -1,4 +1,5 @@
 ﻿using CarRepairApp.Services;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -30,6 +31,8 @@ namespace CarRepairApp.Models.Entities
         public int RoleId { get; set; }
 
         public virtual UserRole Role { get; set; }
+
+        public ICollection<Feedback> Feedbacks { get; set; }
 
         public string this[string columnName]
         {
@@ -84,6 +87,21 @@ namespace CarRepairApp.Models.Entities
                                   out byte[] passwordSalt);
                 PasswordHash = passwordHash;
                 Salt = passwordSalt;
+            }
+        }
+        [NotMapped]
+        public string FullName
+        {
+            get
+            {
+                if (string.IsNullOrWhiteSpace(Patronymic))
+                {
+                    return $"{LastName} {FirstName}";
+                }
+                else
+                {
+                    return $"{LastName} {FirstName} {Patronymic}";
+                }
             }
         }
     }

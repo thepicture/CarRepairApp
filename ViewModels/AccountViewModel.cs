@@ -63,5 +63,23 @@ namespace CarRepairApp.ViewModels
                 Identity.WeakIdentity = User;
             }
         }
+
+        private Command goToFeedbackViewModel;
+
+        public ICommand GoToFeedbackViewModel
+        {
+            get
+            {
+                if (goToFeedbackViewModel == null)
+                    goToFeedbackViewModel = new Command(PerformGoToFeedbackViewModel);
+
+                return goToFeedbackViewModel;
+            }
+        }
+
+        private void PerformGoToFeedbackViewModel()
+        {
+            NavigationService.Navigate<FeedbackViewModel>();
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using CarRepairApp.Services;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Net.Http;
@@ -74,6 +75,63 @@ namespace CarRepairApp.Models.Entities
             workerUser.Salt = workerSalt;
             users.Add(workerUser);
             context.Users.AddRange(users);
+            context.SaveChanges();
+
+            IList<Feedback> feedbacks = new List<Feedback>
+            {
+                new Feedback
+                {
+                    PostingDate = DateTime.Now
+                        .AddDays(-3)
+                        .AddHours(9)
+                        .AddMinutes(30),
+                    Message = "Занесешь завтра фары модели А?",
+                    PosterId = 1,
+                    ReceiverId = 2
+                },
+                new Feedback
+                {
+                    PostingDate = DateTime.Now
+                        .AddDays(-3)
+                        .AddHours(9)
+                        .AddMinutes(50),
+                    Message = "Добрый день",
+                    PosterId = 2,
+                    ReceiverId = 1
+                },
+                new Feedback
+                {
+                    PostingDate = DateTime.Now
+                        .AddDays(-3)
+                        .AddHours(9)
+                        .AddMinutes(55),
+                    Message = "Попробую",
+                    PosterId = 2,
+                    ReceiverId = 1
+                },
+                new Feedback
+                {
+                    PostingDate = DateTime.Now
+                        .AddDays(-3)
+                        .AddHours(30)
+                        .AddMinutes(30),
+                    Message = "Давай",
+                    PosterId = 1,
+                    ReceiverId = 2
+                },
+                new Feedback
+                {
+                    PostingDate = DateTime.Now
+                        .AddDays(-3)
+                        .AddHours(40)
+                        .AddMinutes(30),
+                    Message = "Прихвати незамерзайку",
+                    PosterId = 1,
+                    ReceiverId = 2
+                },
+            };
+
+            context.Feedbacks.AddRange(feedbacks);
             context.SaveChanges();
 
             base.Seed(context);

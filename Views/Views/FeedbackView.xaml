@@ -1,0 +1,163 @@
+﻿<UserControl x:Class="CarRepairApp.Views.Views.FeedbackView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:CarRepairApp.Views.Views"
+             xmlns:viewmodels="clr-namespace:CarRepairApp.ViewModels"
+             d:DataContext="{d:DesignInstance Type=viewmodels:FeedbackViewModel}"
+             mc:Ignorable="d"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             TextElement.FontWeight="Regular"
+             TextElement.FontSize="13"
+             TextOptions.TextFormattingMode="Ideal"
+             TextOptions.TextRenderingMode="Auto"
+             Background="{DynamicResource MaterialDesignPaper}"
+             FontFamily="{DynamicResource MaterialDesignFont}">
+    <GroupBox Header="Моя обратная связь"
+              Style="{StaticResource MaterialDesignCardGroupBox}"
+              VerticalAlignment="Center">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+            <ScrollViewer>
+                <ItemsControl ItemsSource="{Binding MyFeedbacks}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <UniformGrid Columns="1" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <materialDesign:Card Margin="10"
+                                                     Padding="10">
+                                    <materialDesign:Card.Style>
+                                        <Style TargetType="materialDesign:Card">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding IsSelfWriting}"
+                                                             Value="True">
+                                                    <Setter Property="Grid.Column"
+                                                            Value="1" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </materialDesign:Card.Style>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="auto" />
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+                                        <Ellipse Height="100"
+                                                 Width="100"
+                                                 Margin="10">
+                                            <Ellipse.Fill>
+                                                <ImageBrush Stretch="UniformToFill">
+                                                    <ImageBrush.ImageSource>
+                                                        <Binding Path="Receiver.Photo">
+                                                            <Binding.TargetNullValue>
+                                                                <ImageSource>
+                                                                    /Resources/car-wrench-black.png
+                                                                </ImageSource>
+                                                            </Binding.TargetNullValue>
+                                                        </Binding>
+                                                    </ImageBrush.ImageSource>
+                                                </ImageBrush>
+                                            </Ellipse.Fill>
+                                        </Ellipse>
+                                        <Ellipse Height="100"
+                                                 Width="100"
+                                                 Margin="10">
+                                            <Ellipse.Fill>
+                                                <ImageBrush Stretch="UniformToFill">
+                                                    <ImageBrush.ImageSource>
+                                                        <Binding Path="Poster.Photo">
+                                                            <Binding.TargetNullValue>
+                                                                <ImageSource>
+                                                                    /Resources/car-wrench-black.png
+                                                                </ImageSource>
+                                                            </Binding.TargetNullValue>
+                                                        </Binding>
+                                                    </ImageBrush.ImageSource>
+                                                </ImageBrush>
+                                            </Ellipse.Fill>
+                                        </Ellipse>
+                                        <Grid Grid.Column="1">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="auto" />
+                                                <RowDefinition />
+                                            </Grid.RowDefinitions>
+                                            <TextBlock FontWeight="Bold"
+                                                       Text="{Binding Poster.FullName, TargetNullValue=''}">
+                                                <TextBlock.Style>
+                                                    <Style TargetType="TextBlock"
+                                                           BasedOn="{StaticResource MaterialDesignHeadline5TextBlock}">
+                                                        <Setter Property="Visibility"
+                                                                Value="Collapsed" />
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding IsSelfWriting}"
+                                                                         Value="False">
+                                                                <Setter Property="Visibility"
+                                                                        Value="Visible" />
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </TextBlock.Style>
+                                            </TextBlock>
+                                            <TextBlock FontWeight="Bold"
+                                                       Text="Я">
+                                                <TextBlock.Style>
+                                                    <Style TargetType="TextBlock"
+                                                           BasedOn="{StaticResource MaterialDesignHeadline5TextBlock}">
+                                                        <Setter Property="Visibility"
+                                                                Value="Collapsed" />
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding IsSelfWriting}"
+                                                                         Value="True">
+                                                                <Setter Property="Visibility"
+                                                                        Value="Visible" />
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </TextBlock.Style>
+                                            </TextBlock>
+                                            <TextBlock Text="{Binding PostingDate, StringFormat={}{0:yyyy.MM.dd hh:mm}}"
+                                                       TextAlignment="Right"
+                                                       Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+                                                       FontWeight="Normal" />
+                                            <TextBlock Text="{Binding Message}"
+                                                       Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+                                                       Grid.Column="1"
+                                                       Grid.Row="1"
+                                                       FontWeight="Normal"
+                                                       TextWrapping="Wrap" />
+                                        </Grid>
+                                    </Grid>
+                                </materialDesign:Card>
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+            <StackPanel Grid.Row="1">
+                <TextBox Text="{Binding CurrentFeedback.Message, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                         Height="100"
+                         materialDesign:HintAssist.Hint="Начните вводить сообщение" />
+                <ComboBox ItemsSource="{Binding Receivers}"
+                          SelectedItem="{Binding CurrentFeedback.Receiver, ValidatesOnDataErrors=True}"
+                          DisplayMemberPath="FullName"
+                          materialDesign:HintAssist.Hint="Выберите кому отправить">
+                </ComboBox>
+                <Button Command="{Binding SendFeedbackCommand}"
+                        Content="Отправить" />
+            </StackPanel>
+        </Grid>
+    </GroupBox>
+</UserControl>

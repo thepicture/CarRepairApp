@@ -85,11 +85,13 @@
     <Compile Include="Models\Entities\BaseEntity.cs" />
     <Compile Include="Models\Entities\BaseModel.cs" />
     <Compile Include="Models\Entities\DatabaseInitializer.cs" />
+    <Compile Include="Models\Entities\Feedback.cs" />
     <Compile Include="Models\Entities\LoginUser.cs" />
     <Compile Include="Models\Entities\RegistrationUser.cs" />
     <Compile Include="Models\Entities\User.cs" />
     <Compile Include="Models\Entities\UserRole.cs" />
     <Compile Include="Services\DependencyService.cs" />
+    <Compile Include="Services\FeedbackDataStore.cs" />
     <Compile Include="Services\HashGenerator.cs" />
     <Compile Include="Services\IDataStore.cs" />
     <Compile Include="Services\IHashGenerator.cs" />
@@ -113,6 +115,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Views\FeedbackView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Views\LoginView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -131,11 +137,15 @@
     </Compile>
     <Compile Include="ViewModels\AccountViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\FeedbackViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\NavigationViewModel.cs" />
     <Compile Include="ViewModels\RegistrationViewModel.cs" />
     <Compile Include="Views\Views\AccountView.xaml.cs">
       <DependentUpon>AccountView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Views\FeedbackView.xaml.cs">
+      <DependentUpon>FeedbackView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Views\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
