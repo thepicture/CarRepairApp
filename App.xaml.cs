@@ -3,7 +3,6 @@ using CarRepairApp.Properties;
 using CarRepairApp.Services;
 using CarRepairApp.ViewModels;
 using System;
-using System.Data.Entity;
 using System.Windows;
 
 namespace CarRepairApp
@@ -19,7 +18,6 @@ namespace CarRepairApp
 
             DependencyService.Register<MessageService>();
 
-            Database.SetInitializer(new DatabaseInitializer());
             try
             {
                 new BaseModel().Database.Connection

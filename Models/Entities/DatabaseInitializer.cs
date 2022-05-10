@@ -6,20 +6,8 @@ using System.Net.Http;
 
 namespace CarRepairApp.Models.Entities
 {
-    public class DatabaseInitializer : DropCreateDatabaseAlways<BaseModel>
+    public class DatabaseInitializer : CreateDatabaseIfNotExists<BaseModel>
     {
-        public override void InitializeDatabase(BaseModel context)
-        {
-            context.Database.CreateIfNotExists();
-            context.Database.ExecuteSqlCommand(
-                TransactionalBehavior.DoNotEnsureTransaction,
-                string.Format(
-                    "ALTER DATABASE [{0}] SET SINGLE_USER WITH ROLLBACK IMMEDIATE",
-                    context.Database.Connection.Database));
-
-            base.InitializeDatabase(context);
-        }
-
         protected async override void Seed(BaseModel context)
         {
             IList<UserRole> roles = new List<UserRole>
