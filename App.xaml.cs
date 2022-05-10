@@ -46,6 +46,7 @@ namespace CarRepairApp
             DependencyService.Register<CarDataStore>();
             DependencyService.Register<WorkProcessDataStore>();
             DependencyService.Register<PartDataStore>();
+            DependencyService.Register<CustomerDataStore>();
 
             if (!string.IsNullOrWhiteSpace(
                 Settings.Default.SerializedIdentity))

@@ -36,5 +36,18 @@ namespace CarRepairApp.Models.Entities
         }
 
         public ICollection<WorkProcess> WorkProcesses { get; set; }
+
+        [NotMapped]
+        public string FormattedPhoneNumber
+        {
+            get
+            {
+                return $"+{PhoneNumber[0]} " +
+                    $"({PhoneNumber[1]}{PhoneNumber[2]}{PhoneNumber[3]}) " +
+                    $"{PhoneNumber[4]}{PhoneNumber[5]}{PhoneNumber[6]}-" +
+                    $"{PhoneNumber[7]}{PhoneNumber[8]}-" +
+                    $"{PhoneNumber[9]}{PhoneNumber[10]}";
+            }
+        }
     }
 }

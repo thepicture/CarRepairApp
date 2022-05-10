@@ -100,6 +100,7 @@
     <Compile Include="Models\Entities\UserRole.cs" />
     <Compile Include="Models\Entities\WorkProcess.cs" />
     <Compile Include="Services\CarDataStore.cs" />
+    <Compile Include="Services\CustomerDataStore.cs" />
     <Compile Include="Services\DependencyService.cs" />
     <Compile Include="Services\FeedbackDataStore.cs" />
     <Compile Include="Services\HashGenerator.cs" />
@@ -128,6 +129,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Views\AccountView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Views\ContactView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -162,6 +167,7 @@
     <Compile Include="ViewModels\AccountViewModel.cs" />
     <Compile Include="ViewModels\AnalogueViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\ContactViewModel.cs" />
     <Compile Include="ViewModels\FeedbackViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\NavigationViewModel.cs" />
@@ -170,6 +176,9 @@
     <Compile Include="ViewModels\WorkProcessViewModel.cs" />
     <Compile Include="Views\Views\AccountView.xaml.cs">
       <DependentUpon>AccountView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Views\ContactView.xaml.cs">
+      <DependentUpon>ContactView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Views\FeedbackView.xaml.cs">
       <DependentUpon>FeedbackView.xaml</DependentUpon>
