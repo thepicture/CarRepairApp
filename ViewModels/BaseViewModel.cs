@@ -29,6 +29,8 @@ namespace CarRepairApp.ViewModels
             DependencyService.Get<IDataStore<Car>>();
         public IDataStore<WorkProcess> WorkProcessDataStore =>
             DependencyService.Get<IDataStore<WorkProcess>>();
+        public IDataStore<Part> PartDataStore =>
+            DependencyService.Get<IDataStore<Part>>();
 
         public bool IsBusy { get; set; }
         public bool IsNotBusy => !IsBusy;

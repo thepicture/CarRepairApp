@@ -17,4 +17,10 @@
     <DataTemplate DataType="{x:Type viewmodels:WorkProcessViewModel}">
         <views:WorkProcessView />
     </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodels:PartViewModel}">
+        <views:PartView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodels:AnalogueViewModel}">
+        <views:PartView />
+    </DataTemplate>
 </ResourceDictionary>

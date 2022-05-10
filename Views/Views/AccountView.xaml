@@ -28,7 +28,7 @@
                 <Button Command="{Binding GoToWorkProcessViewModel}"
                         Content="Выполнение работ и оплаты"
                         Margin="5" />
-                <Button Command="{Binding GoToContactsViewModel}"
+                <Button Command="{Binding GoToPartViewModel}"
                         Content="Запчасти"
                         Margin="5" />
                 <Button Command="{Binding GoToContactsViewModel}"

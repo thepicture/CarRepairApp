@@ -1,4 +1,5 @@
 ﻿using CarRepairApp.Models.Entities;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 
@@ -18,11 +19,12 @@ namespace CarRepairApp.ViewModels
 
         private async void LoadWorkProcessesAsync()
         {
-            var currentWorkProcesses = await WorkProcessDataStore.GetItemsAsync();
+            IEnumerable<WorkProcess> currentWorkProcesses = 
+                await WorkProcessDataStore.GetItemsAsync();
             if (CurrentCar != null && CurrentCar.Id != 0)
             {
                 currentWorkProcesses = currentWorkProcesses
-                    .Where(w => w.Car.Id == CurrentCar.Id);
+                    .Where(w => w.CarId == CurrentCar.Id);
             }
             WorkProcesses = new ObservableCollection<WorkProcess>(currentWorkProcesses);
         }

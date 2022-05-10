@@ -285,6 +285,152 @@ namespace CarRepairApp.Models.Entities
             context.WorkProcesses.AddRange(workProcesses);
             context.SaveChanges();
 
+            IList<Provider> providers = new List<Provider>
+            {
+                new Provider{Title = "ООО \"Ремонтник\""},
+                new Provider{Title = "ООО \"Каскад\""},
+                new Provider{Title = "ООО \"Part First\""},
+                new Provider{Title = "ООО \"DropIfCarChanges\""}
+            };
+            context.Providers.AddRange(providers);
+            context.SaveChanges();
+
+            IList<Part> parts = new List<Part>();
+            var part1 = new Part
+            {
+                Title = "Фары простые",
+                BaseCode = "A123BC",
+                PriceInRubles = 2000,
+                Description = "Не ломаются со временем",
+                ProviderId = 1,
+                CarId = 1
+            };
+            using (HttpClient client = new HttpClient())
+            {
+                byte[] response = await client
+                    .GetByteArrayAsync("https://live.staticflickr.com/104/272641329_29ba94d516_b.jpg");
+                part1.Photo = response;
+            }
+            var part2 = new Part
+            {
+                Title = "Красный бампер",
+                BaseCode = "A123CB",
+                PriceInRubles = 7000,
+                Description = "Открывается с третьего раза",
+                ProviderId = 2,
+                CarId = 2
+            };
+            using (HttpClient client = new HttpClient())
+            {
+                byte[] response = await client
+                    .GetByteArrayAsync("https://live.staticflickr.com/26/36662094_76038fd239_b.jpg");
+                part2.Photo = response;
+            }
+            var part3 = new Part
+            {
+                Title = "Передние фары",
+                BaseCode = "A321BC",
+                PriceInRubles = 2500,
+                Description = "Свет от фар искуственный, поэтому мелькает",
+                ProviderId = 3,
+                CarId = 3
+            };
+            using (HttpClient client = new HttpClient())
+            {
+                byte[] response = await client
+                    .GetByteArrayAsync("https://live.staticflickr.com/28/36658545_1513eb9a7b_b.jpg");
+                part3.Photo = response;
+            }
+            var part4 = new Part
+            {
+                Title = "Замена номера",
+                BaseCode = "A231BC",
+                PriceInRubles = 2000,
+                Description = "Только блатные номера",
+                ProviderId = 4,
+                CarId = 2
+            };
+            using (HttpClient client = new HttpClient())
+            {
+                byte[] response = await client
+                    .GetByteArrayAsync("https://live.staticflickr.com/21/36799670_809b153976_b.jpg");
+                part4.Photo = response;
+            }
+            var part5 = new Part
+            {
+                Title = "Прочный бампер",
+                BaseCode = "B123CB",
+                PriceInRubles = 3500,
+                Description = "Умеет выдерживать любые удары, но гнётся от кочек на дороге",
+                ProviderId = 3,
+                CarId = 4
+            };
+            using (HttpClient client = new HttpClient())
+            {
+                byte[] response = await client
+                    .GetByteArrayAsync("https://live.staticflickr.com/26/36662094_76038fd239_b.jpg");
+                part5.Photo = response;
+            }
+            var part6 = new Part
+            {
+                Title = "Фары с примесью фосфора",
+                BaseCode = "A321DC",
+                PriceInRubles = 1500,
+                Description = "Топливо и электричество в машине не обязательно",
+                ProviderId = 1,
+                CarId = 4
+            };
+            using (HttpClient client = new HttpClient())
+            {
+                byte[] response = await client
+                    .GetByteArrayAsync("https://live.staticflickr.com/28/36658545_1513eb9a7b_b.jpg");
+                part6.Photo = response;
+            }
+            var part7 = new Part
+            {
+                Title = "Корпус классический",
+                BaseCode = "A113BC",
+                PriceInRubles = 2600,
+                Description = "Выдерживает кочки и не марается",
+                ProviderId = 2,
+                CarId = 4
+            };
+            using (HttpClient client = new HttpClient())
+            {
+                byte[] response = await client
+                    .GetByteArrayAsync("https://live.staticflickr.com/104/272641329_29ba94d516_b.jpg");
+                part7.Photo = response;
+            }
+            var part8 = new Part
+            {
+                Title = "Томатный бампер",
+                BaseCode = "B321CB",
+                PriceInRubles = 5000,
+                Description = "Элитный и с необычным названием",
+                ProviderId = 4,
+                CarId = 1
+            };
+            using (HttpClient client = new HttpClient())
+            {
+                byte[] response = await client
+                    .GetByteArrayAsync("https://live.staticflickr.com/26/36662094_76038fd239_b.jpg");
+                part8.Photo = response;
+            }
+            parts.Add(part1);
+            parts.Add(part2);
+            parts.Add(part3);
+            parts.Add(part4);
+            parts.Add(part5);
+            parts.Add(part6);
+            parts.Add(part7);
+            parts.Add(part8);
+            context.Parts.AddRange(parts);
+            context.SaveChanges();
+
+            DependencyService
+                .Get<IMessageService>()
+                .InformAsync("База данных установлена");
+
             base.Seed(context);
         }
     }

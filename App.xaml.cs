@@ -25,11 +25,11 @@ namespace CarRepairApp
                 new BaseModel().Database.Connection
                     .Open();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 DependencyService
                     .Get<IMessageService>()
-                    .InformErrorAsync("Проверьте подключение к базе данных")
+                    .InformErrorAsync(ex)
                     .Wait();
                 return;
             }
@@ -45,6 +45,7 @@ namespace CarRepairApp
             DependencyService.Register<UserDataStore>();
             DependencyService.Register<CarDataStore>();
             DependencyService.Register<WorkProcessDataStore>();
+            DependencyService.Register<PartDataStore>();
 
             if (!string.IsNullOrWhiteSpace(
                 Settings.Default.SerializedIdentity))

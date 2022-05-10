@@ -4,13 +4,12 @@ using System.ComponentModel.DataAnnotations;
 namespace CarRepairApp.Models.Entities
 {
     [PropertyChanged.AddINotifyPropertyChangedInterface]
-    public class Car : BaseEntity
+    public class Provider : BaseEntity
     {
         [Required]
-        [MaxLength(100)]
-        public string Model { get; set; }
+        [MaxLength(255)]
+        public string Title { get; set; }
 
-        public ICollection<WorkProcess> WorkProcesses { get; set; }
         public ICollection<Part> Parts { get; set; }
     }
 }

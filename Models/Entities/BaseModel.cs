@@ -17,6 +17,8 @@ namespace CarRepairApp.Models.Entities
         public virtual DbSet<ProcessStage> ProcessStages { get; set; }
         public virtual DbSet<WorkProcess> WorkProcesses { get; set; }
         public virtual DbSet<Car> Cars { get; set; }
+        public virtual DbSet<Provider> Providers { get; set; }
+        public virtual DbSet<Part> Parts { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -66,6 +68,19 @@ namespace CarRepairApp.Models.Entities
                .WithRequired(w => w.Car)
                .HasForeignKey(u => u.CarId)
                .WillCascadeOnDelete(false);
+
+            modelBuilder
+                .Entity<Provider>()
+                .HasMany(p => p.Parts)
+                .WithRequired(p => p.Provider)
+                .HasForeignKey(u => u.ProviderId)
+                .WillCascadeOnDelete(false);
+            modelBuilder
+                .Entity<Car>()
+                .HasMany(c => c.Parts)
+                .WithRequired(p => p.Car)
+                .HasForeignKey(u => u.CarId)
+                .WillCascadeOnDelete(false);
         }
     }
 }

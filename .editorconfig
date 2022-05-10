@@ -11,3 +11,6 @@ csharp_prefer_braces = when_multiline
 
 # IDE0055: Fix formatting
 dotnet_diagnostic.IDE0055.severity = none
+
+# CS4014: Because this call is not awaited, execution of the current method continues before the call is completed
+dotnet_diagnostic.CS4014.severity = none

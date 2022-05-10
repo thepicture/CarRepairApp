@@ -82,6 +82,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Commands\Command.cs" />
+    <Compile Include="Controls\PartControl.xaml.cs">
+      <DependentUpon>PartControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Models\Entities\BaseEntity.cs" />
     <Compile Include="Models\Entities\BaseModel.cs" />
     <Compile Include="Models\Entities\Car.cs" />
@@ -89,7 +92,9 @@
     <Compile Include="Models\Entities\DatabaseInitializer.cs" />
     <Compile Include="Models\Entities\Feedback.cs" />
     <Compile Include="Models\Entities\LoginUser.cs" />
+    <Compile Include="Models\Entities\Part.cs" />
     <Compile Include="Models\Entities\ProcessStage.cs" />
+    <Compile Include="Models\Entities\Provider.cs" />
     <Compile Include="Models\Entities\RegistrationUser.cs" />
     <Compile Include="Models\Entities\User.cs" />
     <Compile Include="Models\Entities\UserRole.cs" />
@@ -105,6 +110,7 @@
     <Compile Include="Services\INavigationService.cs" />
     <Compile Include="Services\LoginUserDataStore.cs" />
     <Compile Include="Services\MessageService.cs" />
+    <Compile Include="Services\PartDataStore.cs" />
     <Compile Include="Services\RegistrationUserDataStore.cs" />
     <Compile Include="Services\UserDataStore.cs" />
     <Compile Include="Services\UserIdentityService.cs" />
@@ -113,6 +119,10 @@
     <Compile Include="Services\WorkProcessDataStore.cs" />
     <Compile Include="Utils\NotifyableObject.cs" />
     <Compile Include="Utils\ObservableStack.cs" />
+    <Page Include="Controls\PartControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Dictionaries\ViewTemplateDictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -126,6 +136,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Views\LoginView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Views\PartView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -146,10 +160,12 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ViewModels\AccountViewModel.cs" />
+    <Compile Include="ViewModels\AnalogueViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\FeedbackViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\NavigationViewModel.cs" />
+    <Compile Include="ViewModels\PartViewModel.cs" />
     <Compile Include="ViewModels\RegistrationViewModel.cs" />
     <Compile Include="ViewModels\WorkProcessViewModel.cs" />
     <Compile Include="Views\Views\AccountView.xaml.cs">
@@ -160,6 +176,9 @@
     </Compile>
     <Compile Include="Views\Views\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Views\PartView.xaml.cs">
+      <DependentUpon>PartView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Views\RegistrationView.xaml.cs">
       <DependentUpon>RegistrationView.xaml</DependentUpon>

@@ -99,5 +99,23 @@ namespace CarRepairApp.ViewModels
         {
             NavigationService.Navigate<WorkProcessViewModel>();
         }
+
+        private Command goToPartViewModel;
+
+        public ICommand GoToPartViewModel
+        {
+            get
+            {
+                if (goToPartViewModel == null)
+                    goToPartViewModel = new Command(PerformGoToPartViewModel);
+
+                return goToPartViewModel;
+            }
+        }
+
+        private void PerformGoToPartViewModel()
+        {
+            NavigationService.Navigate<PartViewModel>();
+        }
     }
 }
