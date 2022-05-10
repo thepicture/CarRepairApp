@@ -14,4 +14,7 @@
     <DataTemplate DataType="{x:Type viewmodels:FeedbackViewModel}">
         <views:FeedbackView />
     </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodels:WorkProcessViewModel}">
+        <views:WorkProcessView />
+    </DataTemplate>
 </ResourceDictionary>

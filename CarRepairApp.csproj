@@ -84,12 +84,17 @@
     <Compile Include="Commands\Command.cs" />
     <Compile Include="Models\Entities\BaseEntity.cs" />
     <Compile Include="Models\Entities\BaseModel.cs" />
+    <Compile Include="Models\Entities\Car.cs" />
+    <Compile Include="Models\Entities\Customer.cs" />
     <Compile Include="Models\Entities\DatabaseInitializer.cs" />
     <Compile Include="Models\Entities\Feedback.cs" />
     <Compile Include="Models\Entities\LoginUser.cs" />
+    <Compile Include="Models\Entities\ProcessStage.cs" />
     <Compile Include="Models\Entities\RegistrationUser.cs" />
     <Compile Include="Models\Entities\User.cs" />
     <Compile Include="Models\Entities\UserRole.cs" />
+    <Compile Include="Models\Entities\WorkProcess.cs" />
+    <Compile Include="Services\CarDataStore.cs" />
     <Compile Include="Services\DependencyService.cs" />
     <Compile Include="Services\FeedbackDataStore.cs" />
     <Compile Include="Services\HashGenerator.cs" />
@@ -105,6 +110,7 @@
     <Compile Include="Services\UserIdentityService.cs" />
     <Compile Include="Services\UserRoleDataStore.cs" />
     <Compile Include="Services\ViewModelNavigationService.cs" />
+    <Compile Include="Services\WorkProcessDataStore.cs" />
     <Compile Include="Utils\NotifyableObject.cs" />
     <Compile Include="Utils\ObservableStack.cs" />
     <Page Include="Dictionaries\ViewTemplateDictionary.xaml">
@@ -127,6 +133,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Views\WorkProcessView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Windows\NavigationWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -141,6 +151,7 @@
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\NavigationViewModel.cs" />
     <Compile Include="ViewModels\RegistrationViewModel.cs" />
+    <Compile Include="ViewModels\WorkProcessViewModel.cs" />
     <Compile Include="Views\Views\AccountView.xaml.cs">
       <DependentUpon>AccountView.xaml</DependentUpon>
     </Compile>
@@ -152,6 +163,9 @@
     </Compile>
     <Compile Include="Views\Views\RegistrationView.xaml.cs">
       <DependentUpon>RegistrationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Views\WorkProcessView.xaml.cs">
+      <DependentUpon>WorkProcessView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Windows\NavigationWindow.xaml.cs">
       <DependentUpon>NavigationWindow.xaml</DependentUpon>

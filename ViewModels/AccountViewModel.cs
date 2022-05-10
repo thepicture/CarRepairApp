@@ -81,5 +81,23 @@ namespace CarRepairApp.ViewModels
         {
             NavigationService.Navigate<FeedbackViewModel>();
         }
+
+        private Command goToWorkProcessViewModel;
+
+        public ICommand GoToWorkProcessViewModel
+        {
+            get
+            {
+                if (goToWorkProcessViewModel == null)
+                    goToWorkProcessViewModel = new Command(PerformGoToWorkProcessViewModel);
+
+                return goToWorkProcessViewModel;
+            }
+        }
+
+        private void PerformGoToWorkProcessViewModel()
+        {
+            NavigationService.Navigate<WorkProcessViewModel>();
+        }
     }
 }

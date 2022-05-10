@@ -33,6 +33,7 @@ namespace CarRepairApp.Models.Entities
         public virtual UserRole Role { get; set; }
 
         public ICollection<Feedback> Feedbacks { get; set; }
+        public ICollection<WorkProcess> WorkProcesses { get; set; }
 
         public string this[string columnName]
         {
