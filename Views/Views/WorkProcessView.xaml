@@ -42,7 +42,7 @@
                                            TextAlignment="Center"
                                            FontWeight="Bold"
                                            Style="{StaticResource MaterialDesignHeadline5TextBlock}" />
-                                <Grid HorizontalAlignment="Center">
+                                <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="auto" />
                                         <ColumnDefinition Width="*" />
@@ -69,7 +69,7 @@
                                                VerticalAlignment="Center"
                                                Grid.Column="1" />
                                 </Grid>
-                                <Grid HorizontalAlignment="Center">
+                                <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="auto" />
                                         <ColumnDefinition Width="*" />
