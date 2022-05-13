@@ -1,8 +1,10 @@
 ﻿using CarRepairApp.Services;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 
 namespace CarRepairApp.Models.Entities
 {
@@ -42,6 +44,17 @@ namespace CarRepairApp.Models.Entities
                 if (columnName == nameof(Login))
                     if (string.IsNullOrWhiteSpace(Login))
                         return "Логин обязателен";
+                    else
+                        using (BaseModel model = new BaseModel())
+                        {
+                            if (model.Users
+                                .Any(u =>
+                                    u.Login.Equals(Login,
+                                                   StringComparison.InvariantCulture)))
+                            {
+                                return "Логин занят!";
+                            }
+                        }
                 if (columnName == nameof(LastName))
                     if (string.IsNullOrWhiteSpace(LastName))
                         return "Фамилия обязательна";
