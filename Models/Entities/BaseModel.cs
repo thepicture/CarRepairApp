@@ -1,29 +1,43 @@
 using CarRepairApp.Services;
-using System.Collections.Generic;
 using System;
+using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
 using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace CarRepairApp.Models.Entities
 {
     public class BaseModel : DbContext
     {
         public BaseModel()
-            : base("name=BaseModel")
+            : base(App.CurrentConnectionString)
         {
-            InitializeDatabase();
+            if (Database.Connection.ConnectionString.Contains("master"))
+            {
+                Database.Connection.Open();
+                if (Database.Connection.State != ConnectionState.Open)
+                {
+                    throw new Exception("Invalid connection string");
+                }
+            }
+            else
+            {
+                InitializeDatabase();
+            }
         }
 
-        protected virtual void InitializeDatabase()
+        private void InitializeDatabase()
         {
             if (!Database.Exists())
             {
                 Database.Initialize(true);
-                Seed(this);
+                Seed(this)
+                    .Wait();
             }
         }
 
-        protected async void Seed(BaseModel context)
+        public async Task Seed(BaseModel context)
         {
             IList<UserRole> roles = new List<UserRole>
             {
@@ -432,7 +446,9 @@ namespace CarRepairApp.Models.Entities
 
             DependencyService
                 .Get<IMessageService>()
-                .InformAsync("База данных установлена");
+                .InformAsync("База данных установлена со строкой подключения "
+                + Database.Connection.ConnectionString
+                + ". Сохраните её для устранения возможных проблем");
         }
 
         public virtual DbSet<User> Users { get; set; }

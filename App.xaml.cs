@@ -3,6 +3,7 @@ using CarRepairApp.Properties;
 using CarRepairApp.Services;
 using CarRepairApp.ViewModels;
 using System;
+using System.Collections.Generic;
 using System.Windows;
 
 namespace CarRepairApp
@@ -12,25 +13,79 @@ namespace CarRepairApp
     /// </summary>
     public partial class App : Application
     {
+        private static string currentConnectionString;
+
+        public static string CurrentConnectionString
+        {
+            get
+            {
+                if (!string.IsNullOrWhiteSpace(PermamentConnectionString))
+                {
+                    return PermamentConnectionString;
+                }
+                return currentConnectionString;
+            }
+
+            set => currentConnectionString = value;
+        }
+        public static string PermamentConnectionString
+        {
+            get => Settings.Default.WorkingConnectionString;
+            set
+            {
+                Settings.Default.WorkingConnectionString = value;
+                Settings.Default.Save();
+            }
+        }
+
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
 
             DependencyService.Register<MessageService>();
 
-            try
+            Stack<string> dataSources = new Stack<string>();
+
+            dataSources.Push($@"{Environment.MachineName}\SQLEXPRESS");
+            dataSources.Push(Environment.MachineName);
+            dataSources.Push(".");
+            dataSources.Push(@".\SQLEXPRESS");
+
+            while (true)
             {
-                new BaseModel().Database.Connection
-                    .Open();
+                if (!string.IsNullOrWhiteSpace(PermamentConnectionString))
+                {
+                    break;
+                }
+                CurrentConnectionString = $"data source={dataSources.Pop()};"
+                                          + $"initial catalog=master;"
+                                          + $"integrated security=True;"
+                                          + $"MultipleActiveResultSets=True;"
+                                          + $"App=EntityFramework;";
+                try
+                {
+                    if (dataSources.Count == 0) throw new Exception("Все строки подключения недоступны");
+                    using (BaseModel masterDatabase = new BaseModel()) { }
+                    using (BaseModel db = new BaseModel())
+                    {
+                        PermamentConnectionString = CurrentConnectionString.Replace("master",
+                                                                                    "CarRepairBase");
+                        break;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    if (dataSources.Count == 0)
+                    {
+                        DependencyService
+                            .Get<IMessageService>()
+                            .InformErrorAsync(ex)
+                            .Wait();
+                        return;
+                    }
+                }
             }
-            catch (Exception ex)
-            {
-                DependencyService
-                    .Get<IMessageService>()
-                    .InformErrorAsync(ex)
-                    .Wait();
-                return;
-            }
+
 
             DependencyService.Register<ViewModelNavigationService>();
             DependencyService.Register<HashGenerator>();

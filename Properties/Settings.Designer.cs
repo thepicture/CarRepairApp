@@ -34,5 +34,17 @@ namespace CarRepairApp.Properties {
                 this["SerializedIdentity"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string WorkingConnectionString {
+            get {
+                return ((string)(this["WorkingConnectionString"]));
+            }
+            set {
+                this["WorkingConnectionString"] = value;
+            }
+        }
     }
 }
