@@ -4,6 +4,7 @@ using CarRepairApp.Services;
 using CarRepairApp.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Windows;
 
 namespace CarRepairApp
@@ -13,6 +14,7 @@ namespace CarRepairApp
     /// </summary>
     public partial class App : Application
     {
+        private const string ConnectionStringsPath = "./../../ConnectionStrings.txt";
         private static string currentConnectionString;
 
         public static string CurrentConnectionString
@@ -44,12 +46,18 @@ namespace CarRepairApp
 
             DependencyService.Register<MessageService>();
 
-            Stack<string> dataSources = new Stack<string>();
+            if (!File.Exists(ConnectionStringsPath))
+            {
+                DependencyService
+                           .Get<IMessageService>()
+                           .InformErrorAsync("Не найден файл со строками подключения ConnectionStrings.txt")
+                           .Wait();
+                return;
+            }
 
-            dataSources.Push($@"{Environment.MachineName}\SQLEXPRESS");
-            dataSources.Push(Environment.MachineName);
-            dataSources.Push(".");
-            dataSources.Push(@".\SQLEXPRESS");
+            Stack<string> dataSources;
+            dataSources = new Stack<string>(
+                File.ReadAllLines(ConnectionStringsPath));
 
             while (true)
             {
@@ -64,7 +72,10 @@ namespace CarRepairApp
                                           + $"App=EntityFramework;";
                 try
                 {
-                    if (dataSources.Count == 0) throw new Exception("Все строки подключения недоступны");
+                    if (dataSources.Count == 0)
+                    {
+                        throw new Exception("Все строки подключения недоступны");
+                    }
                     using (BaseModel masterDatabase = new BaseModel()) { }
                     using (BaseModel db = new BaseModel())
                     {
@@ -85,7 +96,6 @@ namespace CarRepairApp
                     }
                 }
             }
-
 
             DependencyService.Register<ViewModelNavigationService>();
             DependencyService.Register<HashGenerator>();
