@@ -109,7 +109,8 @@
                     <TextBox Text="{Binding User.Password, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                              Foreground="Transparent"
                              Grid.Column="1"
-                             Focusable="False" />
+                             Focusable="False" 
+                             Name="TBoxPassword"/>
                     <PasswordBox Name="PBoxPassword"
                                  Background="Transparent"
                                  materialDesign:HintAssist.Hint="Введите пароль"

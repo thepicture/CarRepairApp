@@ -1,9 +1,8 @@
 ﻿using CarRepairApp.Commands;
 using CarRepairApp.Models.Entities;
 using Microsoft.Win32;
-using System;
 using System.IO;
-using System.Linq;
+using System.Security;
 using System.Windows.Input;
 
 namespace CarRepairApp.ViewModels
@@ -11,10 +10,22 @@ namespace CarRepairApp.ViewModels
     [PropertyChanged.AddINotifyPropertyChangedInterface]
     public class AccountViewModel : BaseViewModel
     {
+        [SecurityCritical]
+        private static string _passwordCache;
+
         public AccountViewModel()
         {
             Title = "Личный кабинет";
+        }
+
+        [SecurityCritical]
+        public void OnAppearing()
+        {
+            if (string.IsNullOrEmpty(Identity.WeakIdentity.Password))
+                Identity.WeakIdentity.Password = _passwordCache;
+
             User = Identity.WeakIdentity;
+            _passwordCache = User.Password;
         }
 
         public User User { get; set; }

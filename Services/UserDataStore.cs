@@ -1,6 +1,7 @@
 ﻿using CarRepairApp.Models.Entities;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -20,7 +21,10 @@ namespace CarRepairApp.Services
 
         public Task<User> GetItemAsync(object id)
         {
-            throw new NotImplementedException();
+            using (BaseModel model = new BaseModel())
+            {
+                return model.Users.AsNoTracking().Include(u => u.Role).FirstAsync(u => u.Id == (int)id);
+            }
         }
 
         public async Task<IEnumerable<User>> GetItemsAsync(bool forceRefresh = false)

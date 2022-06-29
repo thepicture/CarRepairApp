@@ -1,4 +1,4 @@
-﻿using CarRepairApp.ViewModels;
+﻿using System.Security;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -14,16 +14,19 @@ namespace CarRepairApp.Views.Views
             InitializeComponent();
         }
 
+        [SecurityCritical]
         private void OnPasswordChanged(object sender, RoutedEventArgs e)
         {
             ((dynamic)DataContext).User.Password = (sender as PasswordBox).Password;
         }
 
+        [SecurityCritical]
         private void OnIsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            if (Visibility == Visibility.Visible && DataContext is AccountViewModel viewModel)
+            if (IsVisible)
             {
-                PBoxPassword.Password = viewModel.User.Password;
+                ((dynamic)DataContext).OnAppearing();
+                PBoxPassword.Password = ((dynamic)DataContext).User.Password;
             }
         }
     }
