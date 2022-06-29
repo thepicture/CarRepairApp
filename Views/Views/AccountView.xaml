@@ -48,11 +48,12 @@
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
                     <materialDesign:PackIcon Kind="Email" />
-                    <TextBox Text="{Binding User.Login, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                    <TextBox Text="{Binding User.Login}"
                              materialDesign:HintAssist.Hint="Введите логин"
                              MaxLength="100"
                              Grid.Column="1"
-                             materialDesign:ValidationAssist.UsePopup="True" />
+                             materialDesign:ValidationAssist.UsePopup="True"
+                             IsReadOnly="True" />
                 </Grid>
                 <Grid>
                     <Grid.ColumnDefinitions>

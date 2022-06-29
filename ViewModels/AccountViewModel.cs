@@ -1,7 +1,9 @@
 ﻿using CarRepairApp.Commands;
 using CarRepairApp.Models.Entities;
 using Microsoft.Win32;
+using System;
 using System.IO;
+using System.Linq;
 using System.Windows.Input;
 
 namespace CarRepairApp.ViewModels

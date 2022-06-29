@@ -41,7 +41,7 @@ namespace CarRepairApp.Models.Entities
         {
             get
             {
-                if (columnName == nameof(Login))
+                if (columnName == nameof(Login) && !DependencyService.Get<IIdentityService<User>>().IsCanClearIdentity)
                     if (string.IsNullOrWhiteSpace(Login))
                         return "Логин обязателен";
                     else
